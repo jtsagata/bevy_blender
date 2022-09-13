@@ -182,8 +182,8 @@ fn calculate_vertex_normals(
 }
 
 mod tests {
-    use super::instance_to_mesh;
-    use blend::{Blend, Instance};
+    // use super::instance_to_mesh;
+    use blend::*;
 
     extern crate test;
     use test::Bencher;
@@ -215,7 +215,7 @@ mod tests {
         let mesh_instance = get_mesh_by_name(&blend, "MECube_192").unwrap();
 
         b.iter(|| {
-            instance_to_mesh(mesh_instance.clone(), version).unwrap();
+            crate::mesh::instance_to_mesh(mesh_instance.clone(), version).unwrap();
         });
     }
 

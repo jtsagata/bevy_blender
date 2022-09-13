@@ -18,26 +18,29 @@
 //!
 //! #### Example
 //! ```rust
+//! use bevy::prelude::*;
+//! use bevy_blender::*;
+//!
 //! fn main() {
-//!     App::build()
-//!         .add_plugin(bevy_blender::BlenderPlugin)
-//!         .add_startup_system(setup.system())
+//!     let app =App::new()
+//!         .add_plugins(DefaultPlugins)
+//!         .add_plugin(BlenderPlugin)
+//!         .add_startup_system(setup);
 //!         // ...
-//!         .run();
+//!      // app.run();
 //! }
 //!
-//! fn setup(commands: &mut Commands, asset_server: Res<AssetServer>) {
+//! fn setup(mut commands: Commands, asset_server: ResMut<AssetServer>) {
 //!     
 //!     // Spawn the Suzanne Blender object with children and its Blender transform
 //!     spawn_blender_object(&mut commands, &asset_server, "demo.blend", "Suzanne", true, None);
-//!        .expect("Error spawning Blender object");
 //!
 //!     // Spawn the Suzanne mesh with the Red material
 //!     commands.spawn_bundle(PbrBundle {
 //!             mesh: asset_server.load(blender_mesh!("demo.blend", "Suzanne")),
 //!             material: asset_server.load(blender_material!("demo.blend", "Red")),
 //!             ..Default::default()
-//!         })
+//!         });
 //!         // ...
 //! }
 //! ```
@@ -109,7 +112,7 @@ impl AssetLoader for BlenderLoader {
         bytes: &'a [u8],
         load_context: &'a mut LoadContext,
     ) -> BoxedFuture<'a, anyhow::Result<()>> {
-        Box::pin(async move { Ok(load_blend_assets(bytes, load_context).await?) })
+        Box::pin(async move { load_blend_assets(bytes, load_context).await })
     }
 
     fn extensions(&self) -> &[&str] {
@@ -152,7 +155,7 @@ async fn load_blend_assets<'a, 'b>(
     }
 
     let unsupported_material: StandardMaterial = StandardMaterial {
-        base_color: Color::rgb(0.9, 0.4, 0.3).into(),
+        base_color: Color::rgb(0.9, 0.4, 0.3),
         reflectance: 0.1,
         perceptual_roughness: 0.5,
         ..Default::default()
@@ -206,8 +209,8 @@ async fn load_blend_assets<'a, 'b>(
 }
 
 /// Takes a right handed, z up transformation matrix (Blender) and returns a right handed, y up (Bevy) version of it
-pub fn right_hand_zup_to_right_hand_yup(rhzup: &Mat4) -> Mat4 {
-    let (scale, rotation, translation) = rhzup.to_scale_rotation_translation();
+pub fn right_hand_zup_to_right_hand_yup(right_hand_zup: &Mat4) -> Mat4 {
+    let (scale, rotation, translation) = right_hand_zup.to_scale_rotation_translation();
     let euler_rotation = rotation.to_euler(EulerRot::XYZ);
 
     Mat4::from_scale_rotation_translation(

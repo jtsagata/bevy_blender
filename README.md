@@ -1,21 +1,8 @@
-# bevy_blender for bevy 0.8.1
+# bevy_blender for bevy 0.8
 
 [![Crate version](https://img.shields.io/crates/v/bevy_blender?style=flat-square)](https://crates.io/crates/bevy_blender/) ![Crate license](https://img.shields.io/crates/l/bevy_blender?style=flat-square)
 
 bevy_blender is a [Bevy](https://bevyengine.org) library that allows you to use assets created in [Blender](https://blender.org) directly from the .blend file.
-
-**This project is in maintenance mode for the time being. It is in a place that I am happy with, and it does all that I currently need it to do. I will address issues with easy fixes, and I will manage PRs if anybody wants to add more features (or make fixes). It has been fun though, and I will probably come back to it in the future.**
-
-### Purpose
-1) I am learning Rust, and it seemed like a not-too-easy and not-too-hard problem.
-1) I would like to be able to maintain several assets in the same .blend file and not have to worry about exporting them.
-1) It seems like a good way to contribute to the Bevy project.
-
-### Related Works
-1) [Arsenal](https://github.com/katharostech/arsenal) is a project with the goal of using Blender as a UI for creating Bevy games.
-1) Reddit/Github user sdfgeoff created the [Blender Bevy Toolkit](https://www.reddit.com/r/rust_gamedev/comments/mr60x4/my_workflow_for_3d_assets_and_custom_components/) which exports Blender objects to Bevy readable scene files (as well as some other cool things).
-
-Both of these projects are neat, but do not serve my desired use case. They both act as extensions of the Bevy game engine, using Blender almost as a front-end framework. I simply want to create assets in Blender and have a ridiculously easy way to access those assets in Bevy with a minimal amount of middle work.
 
 ### Credit where credit is due
 1) This project was heavily modeled after the [bevy_stl](https://github.com/nilclass/bevy_stl) project, so thanks nilclass!

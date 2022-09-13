@@ -109,13 +109,10 @@ impl BlenderObjectBundle {
 /// Iterates over the objects in the blend file and returns Some(Instance) if object
 /// is present and None otherwise
 fn get_object_by_name<'a>(blend: &'a Blend, name: &str) -> Option<Instance<'a>> {
-    for obj in blend.get_by_code(*b"OB") {
-        if obj.get("id").get_string("name") == name {
-            return Some(obj);
-        }
-    }
-
-    None
+    blend
+        .get_by_code(*b"OB")
+        .into_iter()
+        .find(|obj| obj.get("id").get_string("name") == name)
 }
 
 /// Returns a list of all of the children belonging the object in the blend file with the name "name"
