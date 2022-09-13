@@ -1,8 +1,5 @@
-use bevy_math::Vec3;
-use bevy_render::{
-    mesh::{Indices, Mesh},
-    render_resource::PrimitiveTopology,
-};
+use bevy::prelude::*;
+use bevy::render::mesh::{Indices, PrimitiveTopology};
 use blend::runtime::Instance;
 
 use crate::BevyBlenderError;

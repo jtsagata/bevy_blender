@@ -1,17 +1,7 @@
-use crate::{right_hand_zup_to_right_hand_yup, BevyBlenderError};
 use bevy::prelude::*;
-use bevy_asset::{AssetServer, Handle};
-use bevy_ecs::{
-    bundle::Bundle,
-    system::{Commands, ResMut},
-};
-use bevy_pbr::prelude::StandardMaterial;
-use bevy_render::{
-    mesh::Mesh,
-    prelude::{ComputedVisibility, Visibility},
-};
-use bevy_transform::prelude::{GlobalTransform, Transform};
 use blend::{Blend, Instance};
+
+use crate::{right_hand_zup_to_right_hand_yup, BevyBlenderError};
 
 /// A component bundle for Blender Object entities modeled after bevy_pbr::MaterialMeshBundle
 #[derive(Bundle)]

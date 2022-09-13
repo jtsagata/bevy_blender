@@ -44,10 +44,9 @@
 //!
 //! A suite of examples can be found in `examples/`. Currently, there are three examples, one that shows how to import just a mesh, one that shows how to import just a material, and one that shows how to import whole objects. Simply run `cargo run --example=object` (or `example=mesh`, or `example=material`) to execute it. This will open a .blend file located at `assets/demo.blend`.
 
+use bevy::asset::{AssetLoader, LoadContext, LoadedAsset};
 use bevy::prelude::*;
-use bevy_asset::{AddAsset, AssetLoader, LoadContext, LoadedAsset};
-use bevy_math::{Mat4, Quat, Vec3};
-use bevy_utils::BoxedFuture;
+use bevy::utils::BoxedFuture;
 use blend::Blend;
 
 mod material;
@@ -209,12 +208,12 @@ async fn load_blend_assets<'a, 'b>(
 /// Takes a right handed, z up transformation matrix (Blender) and returns a right handed, y up (Bevy) version of it
 pub fn right_hand_zup_to_right_hand_yup(rhzup: &Mat4) -> Mat4 {
     let (scale, rotation, translation) = rhzup.to_scale_rotation_translation();
-    let euler_rotation = rotation.to_euler(bevy_math::EulerRot::XYZ);
+    let euler_rotation = rotation.to_euler(EulerRot::XYZ);
 
     Mat4::from_scale_rotation_translation(
         Vec3::new(scale[0], scale[2], scale[1]),
         Quat::from_euler(
-            bevy_math::EulerRot::XZY,
+            EulerRot::XZY,
             euler_rotation.0,
             -euler_rotation.1,
             euler_rotation.2,

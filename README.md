@@ -1,4 +1,4 @@
-# bevy_blender
+# bevy_blender for bevy 0.8.1
 
 [![Crate version](https://img.shields.io/crates/v/bevy_blender?style=flat-square)](https://crates.io/crates/bevy_blender/) ![Crate license](https://img.shields.io/crates/l/bevy_blender?style=flat-square)
 
